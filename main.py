@@ -6,8 +6,8 @@ class Query:
         self.number = int(query[1])
         if self.type == 'add':
             self.name = query[2]
-
-def read_queries():
+            
+def read_queries():                                                 # Nosaka cik daudz darbibas tiks veiktas
     n = int(input())
     return [Query(input().split()) for _ in range(n)]
 
@@ -16,21 +16,17 @@ def write_responses(result):
 
 def process_queries(queries):
     result = []
-    # Keep a dictionary to store contacts using numbers as keys
-    contacts = {}
+    contacts = {}                                                   # Saglaba sarakstu kur glaba kontaktus izmantojot numurus
     for cur_query in queries:
-        if cur_query.type == 'add':
-            # Add or update contact in the dictionary
+        if cur_query.type == 'add':                                 # Pevieno kontaktu sarakstam
             contacts[cur_query.number] = cur_query.name
-        elif cur_query.type == 'del':
-            # Remove contact from the dictionary if it exists
+        elif cur_query.type == 'del':                               # Izdzes kontaktu no saraksta ja eksiste
             if cur_query.number in contacts:
                 del contacts[cur_query.number]
-        elif cur_query.type == 'find':
-            # Look for the contact in the dictionary
+        elif cur_query.type == 'find':                              # Atrod kontaktu no saraksta
             response = contacts.get(cur_query.number, 'not found')
             result.append(response)
-        else:
+        else:                                                       # Ja komanda neatbilst nevienam no dotajiem
             print("invalid command")
     return result
 
