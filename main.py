@@ -7,7 +7,7 @@ class Query:
         if self.type == 'add':
             self.name = query[2]
 
-def read_queries():
+def read_queries():                                         # Inputs
     n = int(input())
     return [Query(input().split()) for i in range(n)]
 
@@ -16,16 +16,16 @@ def write_responses(result):
 
 def process_queries(queries):
     result = []
-    contacts = []
-    for cur_query in queries:
-        if cur_query.type == 'add':
+    contacts = []                                           # Saglaba eksistejosos kontaktus
+    for cur_query in queries:  
+        if cur_query.type == 'add':                         # Pievieno kontaktus
             for contact in contacts:
-                if contact.number == cur_query.number:
+                if contact.number == cur_query.number:      # Ja kontakts jau eksiste ar so numuru, tad to parraksta
                     contact.name = cur_query.name
                     break
-            else: # otherwise, just add it
-                contacts.append(cur_query)
-        elif cur_query.type == 'del':
+                else:                                       # Ja nav, tad izveido jaunu kontaktu lista
+                    contacts.append(cur_query)
+        elif cur_query.type == 'del':                       # Dzezs kontaktu
             for j in range(len(contacts)):
                 if contacts[j].number == cur_query.number:
                     contacts.pop(j)
